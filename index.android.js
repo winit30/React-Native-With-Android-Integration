@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native';
 import { RNCamera, FaceDetector } from 'react-native-camera';
+import { SvgCss } from 'react-native-svg';
 
 class HelloUser extends React.Component {
   constructor(props) {
@@ -30,38 +31,20 @@ class HelloUser extends React.Component {
 
   render() {
 
+    const svgXml = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13">
+          <g fill="#222" fill-rule="evenodd" transform="translate(.446)">
+              <rect width="1.152" height="12.674" x="5.94" rx=".576"/>
+              <path d="M12.853 6.337c0 .318-.258.576-.576.576H.755c-.318 0-.576-.258-.576-.576 0-.318.258-.576.576-.576h11.522c.318 0 .576.258.576.576z"/>
+          </g>
+      </svg>
+      `;
+
     return (
       <View style={styles.container}>
       {this.state.imageUrl && <Image style={{width: 200, height: 200}} source={{uri: this.state.imageUrl}} /> }
         <View style={styles.container}>
-          <RNCamera
-            ref={ref => {
-              this.camera = ref;
-            }}
-            style={styles.preview}
-            type={RNCamera.Constants.Type.back}
-            flashMode={RNCamera.Constants.FlashMode.on}
-            androidCameraPermissionOptions={{
-              title: 'Permission to use camera',
-              message: 'We need your permission to use your camera',
-              buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
-            }}
-            androidRecordAudioPermissionOptions={{
-              title: 'Permission to use audio recording',
-              message: 'We need your permission to use your audio',
-              buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
-            }}
-            onGoogleVisionBarcodesDetected={({ barcodes }) => {
-              console.log(barcodes);
-            }}
-          />
-          <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-            <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-              <Text style={{ fontSize: 14 }}> SNAP </Text>
-            </TouchableOpacity>
-          </View>
+          <SvgCss xml={svgXml} width="100%" height="100%" />
         </View>
 
       </View>
@@ -71,8 +54,7 @@ class HelloUser extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   preview: {
     flex: 1,
