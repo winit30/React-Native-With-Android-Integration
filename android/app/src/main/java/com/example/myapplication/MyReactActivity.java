@@ -48,6 +48,7 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .addPackage(new MainReactPackage())
                 .addPackage(new RNCameraPackage())
                 .addPackage(new SvgPackage())
+                .addPackage(new CustomCryptoPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
                 .build();

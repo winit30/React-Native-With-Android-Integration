@@ -10,6 +10,14 @@ import {
 import { RNCamera, FaceDetector } from 'react-native-camera';
 import { SvgCss } from 'react-native-svg';
 
+import CryptoModule from './Crypto';
+
+CryptoModule.show('Awesome', 4);
+
+CryptoModule.encrypt("some text goes here", "test1234", (msg) => {
+    alert(msg);
+});
+
 class HelloUser extends React.Component {
   constructor(props) {
     super(props);
