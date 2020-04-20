@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import com.example.myapplication.CustomToastPackage;
+
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,6 +50,7 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .addPackage(new MainReactPackage())
                 .addPackage(new RNCameraPackage())
                 .addPackage(new SvgPackage())
+                .addPackage(new CustomToastPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
                 .build();

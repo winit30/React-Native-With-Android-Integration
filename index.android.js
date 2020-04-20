@@ -8,7 +8,8 @@ import {
   Image
 } from 'react-native';
 import { RNCamera, FaceDetector } from 'react-native-camera';
-import { SvgCss } from 'react-native-svg';
+import ToastExample from './ToastExample';
+// import { SvgCss } from 'react-native-svg';
 
 class HelloUser extends React.Component {
   constructor(props) {
@@ -29,6 +30,10 @@ class HelloUser extends React.Component {
     }
   };
 
+  componentDidMount(){
+    ToastExample.show('Awesome', ToastExample.SHORT);
+  }
+
   render() {
 
     const svgXml = `
@@ -44,7 +49,8 @@ class HelloUser extends React.Component {
       <View style={styles.container}>
       {this.state.imageUrl && <Image style={{width: 200, height: 200}} source={{uri: this.state.imageUrl}} /> }
         <View style={styles.container}>
-          <SvgCss xml={svgXml} width="100%" height="100%" />
+          <Text>{JSON.stringify(this.props)}</Text>
+          {/* <SvgCss xml={svgXml} width="100%" height="100%" /> */}
         </View>
 
       </View>
