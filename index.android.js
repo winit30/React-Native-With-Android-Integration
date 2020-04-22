@@ -10,12 +10,24 @@ import {
 import { RNCamera, FaceDetector } from 'react-native-camera';
 import { SvgCss } from 'react-native-svg';
 
-import CryptoModule from './Crypto';
+import { CryptoModule, GCMCryptoModule } from './NativeUtils';
 
 CryptoModule.show('Awesome', 4);
 
 CryptoModule.encrypt("some text goes here", "test1234", (msg) => {
     alert(msg);
+});
+
+GCMCryptoModule.nativeEncrypt('This is test data', 'thisisthetestkey',(msg) => {
+  console.log('err', msg);
+},(encryptedData) => {
+  console.log(encryptedData);
+});
+
+GCMCryptoModule.nativeDecrypt('AAAADAAAAAAAAAAAAAAAAMj7e0MHUabJOGXPmsXaI2Xt1icsljhWuK7k0IWe0TXa1g==', 'thisisthetestkey',(msg) => {
+  console.log('err', msg);
+},(encryptedData) => {
+  console.log(encryptedData);
 });
 
 class HelloUser extends React.Component {

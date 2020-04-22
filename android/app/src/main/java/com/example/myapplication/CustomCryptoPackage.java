@@ -22,6 +22,7 @@ public class CustomCryptoPackage implements ReactPackage {
     List<NativeModule> modules = new ArrayList<>();
 
     modules.add(new CryptoModule(reactContext));
+    modules.add(new GCMCryptoModule(reactContext));
 
     return modules;
   }
