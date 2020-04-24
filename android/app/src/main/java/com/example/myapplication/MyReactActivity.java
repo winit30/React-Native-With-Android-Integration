@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,6 +20,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 
+import com.imagepicker.ImagePickerPackage;
 import org.reactnative.camera.RNCameraPackage;
 
 import javax.annotation.Nullable;
@@ -48,12 +50,12 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .addPackage(new MainReactPackage())
                 .addPackage(new RNCameraPackage())
                 .addPackage(new SvgPackage())
+                .addPackage(new ImagePickerPackage())
                 .addPackage(new CustomCryptoPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
                 .build();
         mReactRootView.startReactApplication(mReactInstanceManager, "AwesomeReactApp", initialProps);
-
         setContentView(mReactRootView);
     }
 
@@ -116,14 +118,21 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
     }
     @Override
     public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+
         mPermissionsCallback = new Callback() {
             @Override
             public void invoke(Object... args) {
                 if (mPermissionListener != null && mPermissionListener.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
                     mPermissionListener = null;
                 }
+
             }
+
         };
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        mReactInstanceManager.onActivityResult(this,requestCode, resultCode, data);
+    }
 }

@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-image-picker')
     if (enableHermes) {
        def hermesPath = "../../node_modules/hermesvm/android/";
        debugImplementation files(hermesPath + "hermes-debug.aar")
