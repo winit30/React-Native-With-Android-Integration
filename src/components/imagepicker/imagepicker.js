@@ -24,6 +24,7 @@ export default class ImagePickerComponent extends Component {
       fileUri: "",
     };
   }
+  
 
   chooseImage = async () => {
     let options = {
