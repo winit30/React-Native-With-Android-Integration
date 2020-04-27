@@ -12,23 +12,25 @@ import { SvgCss } from 'react-native-svg';
 
 import { CryptoModule, GCMCryptoModule } from './NativeUtils';
 
+import SignaturePad from 'react-native-signature-pad';
+
 CryptoModule.show('Awesome', 4);
 
-CryptoModule.encrypt("some text goes here", "test1234", (msg) => {
-    alert(msg);
-});
+// CryptoModule.encrypt("some text goes here", "test1234", (msg) => {
+//     alert(msg);
+// });
 
-GCMCryptoModule.nativeEncrypt('This is test data', 'thisisthetestkey',(msg) => {
-  console.log('err', msg);
-},(encryptedData) => {
-  console.log(encryptedData);
-});
+// GCMCryptoModule.nativeEncrypt('This is test data', 'thisisthetestkey',(msg) => {
+//   console.log('err', msg);
+// },(encryptedData) => {
+//   console.log(encryptedData);
+// });
 
-GCMCryptoModule.nativeDecrypt('AAAADAAAAAAAAAAAAAAAAMj7e0MHUabJOGXPmsXaI2Xt1icsljhWuK7k0IWe0TXa1g==', 'thisisthetestkey',(msg) => {
-  console.log('err', msg);
-},(encryptedData) => {
-  console.log(encryptedData);
-});
+// GCMCryptoModule.nativeDecrypt('AAAADAAAAAAAAAAAAAAAAMj7e0MHUabJOGXPmsXaI2Xt1icsljhWuK7k0IWe0TXa1g==', 'thisisthetestkey',(msg) => {
+//   console.log('err', msg);
+// },(encryptedData) => {
+//   console.log(encryptedData);
+// });
 
 class HelloUser extends React.Component {
   constructor(props) {
@@ -49,6 +51,14 @@ class HelloUser extends React.Component {
     }
   };
 
+  _signaturePadError = (error) => {
+    console.error(error);
+  };
+ 
+  _signaturePadChange = ({base64DataUrl}) => {
+    console.log("Got new signature: " + base64DataUrl);
+  };
+
   render() {
 
     const svgXml = `
@@ -66,6 +76,11 @@ class HelloUser extends React.Component {
         <View style={styles.container}>
           <SvgCss xml={svgXml} width="100%" height="100%" />
         </View>
+        <View style={{width: 250, height: 250}}>
+          <SignaturePad onError={this._signaturePadError}
+                        onChange={this._signaturePadChange}
+                        style={{flex: 1, backgroundColor: 'white'}}/>
+      </View>
 
       </View>
     )
@@ -74,7 +89,7 @@ class HelloUser extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'red',
   },
   preview: {
     flex: 1,

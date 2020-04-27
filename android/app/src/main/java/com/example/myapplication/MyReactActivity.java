@@ -18,6 +18,7 @@ import com.facebook.react.modules.core.PermissionListener;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 
 import org.reactnative.camera.RNCameraPackage;
 
@@ -49,6 +50,7 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .addPackage(new RNCameraPackage())
                 .addPackage(new SvgPackage())
                 .addPackage(new CustomCryptoPackage())
+                .addPackage(new RNCWebViewPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
                 .build();
