@@ -21,6 +21,7 @@ import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 
 import com.imagepicker.ImagePickerPackage;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import org.reactnative.camera.RNCameraPackage;
 
 import javax.annotation.Nullable;
@@ -50,6 +51,7 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .addPackage(new MainReactPackage())
                 .addPackage(new RNCameraPackage())
                 .addPackage(new SvgPackage())
+                .addPackage(new RNCWebViewPackage())
                 .addPackage(new ImagePickerPackage())
                 .addPackage(new CustomCryptoPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)

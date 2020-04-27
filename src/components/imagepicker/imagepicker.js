@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import styles from "./imagepicker.style";
-
+let presignedUrl =
+  "https://fc-commoncdn-staging-s3.s3.ap-south-1.amazonaws.com/vkyc/VjAxI2E5ZjU5ZjQ5LWFhZjktNGRiMS1hMWViLTRkOThlOThkMjgxNg/PAN/1587722214066?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200424T095654Z&X-Amz-SignedHeaders=host&X-Amz-Expires=35999&X-Amz-Credential=AKIATYWQQD2TAQXMMZNF%2F20200424%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=2f81e4277a4b9da86f16721a626bc6a3e9298da5eac9d31cf47ddb847c09f054";
 export default class ImagePickerComponent extends Component {
   constructor(props) {
     super(props);
@@ -24,14 +25,13 @@ export default class ImagePickerComponent extends Component {
       fileUri: "",
     };
   }
-  
 
   chooseImage = async () => {
     let options = {
       title: "Select Image",
       storageOptions: {
         skipBackup: true,
-        path: "images"
+        path: "images",
       },
     };
     try {
@@ -46,12 +46,27 @@ export default class ImagePickerComponent extends Component {
           console.log("User tapped custom button: ", response.customButton);
           alert(response.customButton);
         } else {
-          console.log("response", JSON.stringify(response));
+          console.log("response", response.type);
           this.setState({
             filePath: response,
             fileData: response.data,
             fileUri: response.uri,
           });
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                console.log(xhr);
+                // Successfully uploaded the file.
+              } else {
+                console.log(xhr);
+                // The file could not be uploaded.
+              }
+            }
+          };
+          xhr.open("PUT", presignedUrl);
+          xhr.setRequestHeader("Content-Type", response.type);
+          xhr.send({ uri: response.uri, type: response.type, name: "image" });
         }
       });
     } catch (err) {
@@ -60,7 +75,6 @@ export default class ImagePickerComponent extends Component {
   };
 
   launchCamera = async () => {
-   
     let options = {
       storageOptions: {
         skipBackup: true,

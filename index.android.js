@@ -12,6 +12,7 @@ import { SvgCss } from "react-native-svg";
 
 import { CryptoModule, GCMCryptoModule } from "./NativeUtils";
 import ImagePickerComponent from "./src/components/imagepicker";
+import SignaturePadComponent from "./src/components/signaturepad";
 
 // CryptoModule.show("Awesome", 4);
 
@@ -76,7 +77,7 @@ class HelloUser extends React.Component {
         <View style={styles.container}>
           <SvgCss xml={svgXml} width="100%" height="100%" />
         </View> */}
-        <ImagePickerComponent />
+        <SignaturePadComponent />
       </View>
     );
   }
