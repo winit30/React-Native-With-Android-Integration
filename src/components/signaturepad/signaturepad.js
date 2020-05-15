@@ -30,7 +30,6 @@ export default class SignaturePadComponent extends Component {
         {this.state.fileData !== "" && (
           <>
             <Text>Your Signature Image</Text>
-
             <Image
               source={{ uri: this.state.fileData }}
               style={{

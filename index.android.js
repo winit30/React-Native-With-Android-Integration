@@ -77,7 +77,7 @@ class HelloUser extends React.Component {
         <View style={styles.container}>
           <SvgCss xml={svgXml} width="100%" height="100%" />
         </View> */}
-        <SignaturePadComponent />
+        <ImagePickerComponent />
       </View>
     );
   }
